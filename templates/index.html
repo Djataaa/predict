@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Judul Halaman -->
+    <title>API Prediction</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Icon 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">-->
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href={{ url_for('static', filename='/css/bootstrap.min.css') }} type="text/css">
+    <link rel="stylesheet" href={{ url_for('static', filename='/css/client_side.css') }}  type="text/css">
+    
+    <!-- JavaScript -->
+    <script src={{ url_for('static', filename='/js/jquery_3.6.0.min.js') }} ></script>
+    <script src={{ url_for('static', filename='/js/bootstrap_3.4.1.min.js') }} ></script>
+</head>
+  
+
+<body id="halamanku" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <!-- Navigation Bar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			
+			<!-- Logo
+			<div class="navbar-header">
+				<img src={{ url_for('static', filename='/images/orbit_logo.jpg') }} alt="Orbit Logo" 
+				width="50" height="50" align="left">
+				<a class="navbar-brand" href="#halamanku">&#160; Prediksi Kelulusan Mata Kuliah</a>
+			</div>
+			-->
+			
+			<!-- Daftar Halaman -->
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#informasi">INFORMASI</a></li>
+					<li><a href="#aplikasi">APLIKASI</a></li>
+					<!--<li><a href="#anggotaKelompok">ANGGOTA KELOMPOK</a></li> -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+  <!-- Bagian Halaman (Informasi) -->
+	<div id="informasi" class="container-fluid">
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-sm-6">
+				<!-- Deskripsi Aplikasi -->
+				<h1>API GP</h1>
+				<h3>API Graduation Prediction</h3>
+				<p style="text-align: justify;text-justify: inter-word;">
+					Aplikasi ini dibuat untuk prediksi kelulusan mahasiswa pasca UTS
+					sehingga mahasiswa bisa memperbaiki pola belajar dan lulus dengan hasil yang maksimal.
+					Nilai yang perlu diinput ialah nilai UTS, Quiz Online dan Tugas Online. Melalui <i>Rule model</i> yang ada akan dilakukan prediksi kelulusan.
+					Aplikasi ini dibuat dengan 120 data record dengan berlabel lulus/tidak lulus. 
+				</p>
+				<br>
+
+				<!-- Tombol Mulai -->
+				<nav id="navgo" class="navbar" style="background-color:#ffffff;z-index: 0;">
+					<ul class="nav nav-pills">
+						<li class="nav-item">
+							<a class="btn btn-default btn-lg" href="#aplikasi" style="background-color:#28ace5">Mulai</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			
+			<div class="col-sm-6">
+				<br>
+				<h3>Rule Model</h3>
+				<br>
+				<!-- Gambar Rule Model -->
+				<img src={{ url_for('static', filename='/images/rule_model.jpg') }} width="500" ></img>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h3>Confusion Matrix</h3>
+				<br>
+				<!-- Gambar Confusion Matrix -->
+				<img src={{ url_for('static', filename='/images/cm.png') }} width="500" ></img>
+			</div>
+			
+			<div class="col-sm-6">
+				<h3>Important Feature</h3>
+				<br>
+				<!-- Gambar Confusion Matrix -->
+				<img src={{ url_for('static', filename='/images/fitur.png') }} width="500" ></img>
+			</div>
+		</div>
+		<br>
+	</div>
+	
+  <!-- Bagian Halaman (Aplikasi) -->
+	<div id="aplikasi" data-bs-spy="scroll" data-bs-target="#navgo" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-sm-12">
+				</br>
+				<!-- Input Nilai dari user -->
+				<h2 style="margin-left: 50px;">Atribut Nilai </h2>
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('predict')}}"method="post">
+          <div class="form-group" style="margin-left: 50px;"></divclass>
+            <input type="text" name="UTS" placeholder="UTS" required="required" />
+            </br>
+            </br>
+            <input type="text" name="tugasonline" placeholder="tugasonline" required="required" />
+            </br>
+            </br>
+            <input type="text" name="quizonline" placeholder="quizonline" required="required" />
+            </br>
+            </br>
+            <button type="submit" class="btn btn-default btn-lg">Predict</button>
+			<!-- Bagian Halaman untuk Hasil Prediksi -->
+			<h2>Hasil Prediksi: {{ prediction_text }}</h2>
+			</br>
+          </div>
+        </form>
+			</div>
+				
+			<div class="col-sm-6">
+				
+			</div>
+		</div>
+	</div>
+
+  <!-- Footer -->
+	<footer class="container-fluid text-center">
+		<a href="#halamanku" title="To Top">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>API Graduation Prediction <br> <a href="#/">made by Redja</a></p>
+	</footer>
+
+	<!-- JavaScript untuk Animasi Scroll -->
+	<script  src={{ url_for('static', filename='/js/client_side.js') }}></script>
+
+</body>
+</html>
