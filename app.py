@@ -20,9 +20,9 @@ def predict():
     prediction = model.predict(features)
 
     if prediction==0:
-        hasil = "Lulus"
+        hasil = "Lulus, pertahankan dan tingkatkan pola belajar anda"
     elif prediction==1:
-        hasil = "Tidak Lulus"
+        hasil = "Tidak Lulus, perbaiki pola belajar anda dan segera hubungi dosen anda untuk tugas tambahan"
     else: hasil="error"
 
     return render_template("index.html", prediction_text = "Mahasiswa/i diprediksi akan {}".format(hasil))
