@@ -9,13 +9,30 @@ import pandas as pd
 app = Flask(__name__)
 model = pickle.load(open("model_2.pkl", "rb"))
 
+def is_valid_input(value):
+    try:
+        num = float(value)
+        return 0 <= num <= 100
+    except ValueError:
+        return False
+
 @app.route("/")
 def Home():
     return render_template("index.html")
 
 @app.route("/predict", methods = ["POST"])
 def predict():
-    float_features = [float(x) for x in request.form.values()]
+    
+    UTS = request.form["UTS"]
+    tugasonline = request.form["tugasonline"]
+    quizonline = request.form["quizonline"]
+
+    # Validate input (check if they are numbers within the range 0 to 100)
+    if not is_valid_input(UTS) or not is_valid_input(tugasonline) or not is_valid_input(quizonline):
+        return render_template("index.html", error_message="Input harus angka dan dengan nilai minimal 0 dan maksimal 100")
+
+    # Convert input values to float
+    float_features = [float(UTS), float(tugasonline), float(quizonline)]
     features = [np.array(float_features)]
     prediction = model.predict(features)
 
